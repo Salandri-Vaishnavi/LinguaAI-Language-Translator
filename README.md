@@ -4,6 +4,14 @@
 
 The application is designed with a simple and user-friendly interface to make multilingual communication easier and more accessible.
 
+## 🌐 Live Demo
+
+🚀 **Try LinguaAI:** https://linguaai-language-translator.onrender.com
+
+Explore multilingual text translation and text-to-speech functionality directly in your browser.
+
+**GitHub Repository:** https://github.com/Salandri-Vaishnavi/LinguaAI-Language-Translator
+
 ## ✨ Features
 
 - **Multi-Language Translation:** Translate text across 15 configured languages.
