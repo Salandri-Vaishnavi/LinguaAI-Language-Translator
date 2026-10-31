@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinguaAI - Language Translator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">Lingua<span>AI</span></div>
+        <p>Breaking language barriers with intelligent translation</p>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <p class="eyebrow">WELCOME TO LINGUAAI</p>
+            <h1>Words Without <span>Boundaries.</span></h1>
+            <p class="description">
+                Translate your thoughts into different languages with ease.
+                Simple, fast and accessible language translation.
+            </p>
+        </section>
+
+        <section class="translator-card">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Language Translator</h2>
+                    <p>Enter your text and choose the languages.</p>
+                </div>
+
+                <div class="status">
+                    <span class="status-dot"></span>
+                    Ready to translate
+                </div>
+            </div>
+
+            <div class="language-row">
+
+                <div class="language-field">
+                    <label for="sourceLanguage">FROM</label>
+
+                    <select id="sourceLanguage">
+                        <option value="auto" selected>Detect language</option>
+
+                        {% for name, code in languages.items() %}
+                            <option value="{{ code }}">{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button
+                    id="swapButton"
+                    class="swap-button"
+                    type="button"
+                    title="Swap languages"
+                    aria-label="Swap languages"
+                >⇄</button>
+
+                <div class="language-field">
+                    <label for="targetLanguage">TO</label>
+
+                    <select id="targetLanguage">
+                        {% for name, code in languages.items() %}
+                            <option
+                                value="{{ code }}"
+                                {% if code == 'te' %}selected{% endif %}
+                            >
+                                {{ name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="text-panels">
+
+                <!-- Original text panel -->
+                <div class="text-panel">
+
+                    <div class="panel-heading">
+                        <label for="inputText">Your text</label>
+
+                        <div class="result-actions">
+                            <button
+                                id="inputSpeakButton"
+                                class="icon-button"
+                                type="button"
+                                title="Listen to original text"
+                                aria-label="Listen to original text"
+                            >🔊</button>
+
+                            <button
+                                id="clearButton"
+                                class="text-button"
+                                type="button"
+                            >Clear</button>
+                        </div>
+                    </div>
+
+                    <textarea
+                        id="inputText"
+                        maxlength="5000"
+                        placeholder="Type or paste your text here..."
+                    ></textarea>
+
+                    <div class="panel-footer">
+                        <span id="characterCount">0 / 5000</span>
+                    </div>
+
+                </div>
+
+                <!-- Translation output panel -->
+                <div class="text-panel">
+
+                    <div class="panel-heading">
+                        <label for="outputText">Translation</label>
+
+                        <div class="result-actions">
+                            <button
+                                id="speakButton"
+                                class="icon-button"
+                                type="button"
+                                title="Listen to translation"
+                                aria-label="Listen to translation"
+                            >🔊</button>
+
+                            <span class="result-label">RESULT</span>
+                        </div>
+                    </div>
+
+                    <div
+                        id="outputText"
+                        class="output-text"
+                        aria-live="polite"
+                    ></div>
+
+                    <div class="panel-footer">
+                        <span id="resultLanguage">Waiting for translation</span>
+
+                        <div class="result-actions">
+                            <button
+                                id="copyButton"
+                                class="icon-button"
+                                type="button"
+                                title="Copy translation"
+                                aria-label="Copy translation"
+                            >▢</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                id="translateButton"
+                class="translate-button"
+                type="button"
+            >
+                <span id="translateButtonText">Translate Text</span>
+            </button>
+
+            <p id="message" class="message" role="status"></p>
+
+            <p class="privacy-note">
+                Your text is processed through an online translation service.
+            </p>
+
+        </section>
+
+        <section class="features">
+
+            <div class="feature">
+                <div class="feature-icon">🌍</div>
+                <h3>Multiple Languages</h3>
+                <p>Translate between 15 different languages.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Simple Translation</h3>
+                <p>Enter your text and get translated results.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🔊</div>
+                <h3>Audio Support</h3>
+                <p>Listen to your original text and translations.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 LinguaAI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.LANGUAGES = {{ languages | tojson }};
+    </script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
